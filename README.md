@@ -63,31 +63,31 @@ R-CNN : __Region with CNN features__
 1. 필요한 종속성을 설치합니다:
 
 '''python
-pip install -r requirements.txt
+    pip install -r requirements.txt
 '''
 
 2. main 함수에서 이미지 URL을 교체합니다
 
 '''python
-#메인 함수
-def main():
-    # 직접 이미지 링크로 교체하세요
-    image_url = 'https://i.imgur.com/YOUR_IMAGE_ID.jpg'
-    img_array = download_and_preprocess_image(image_url)
+    #메인 함수
+    def main():
+        # 직접 이미지 링크로 교체하세요
+        image_url = 'https://i.imgur.com/YOUR_IMAGE_ID.jpg'
+        img_array = download_and_preprocess_image(image_url)
 
-    if img_array is not None:
-        model = build_rcnn_model()
-        heatmap = detect_objects(img_array, model)
-        visualize_heatmap(heatmap, 'path/to/your/image.jpg')  # 로컬 이미지의 경로로 변경
+        if img_array is not None:
+            model = build_rcnn_model()
+            heatmap = detect_objects(img_array, model)
+            visualize_heatmap(heatmap, 'path/to/your/image.jpg')  # 로컬 이미지의 경로로 변경
 
-if _name__ == "_main__":
-    main()
+        if _name__ == "_main__":
+        main()
 '''
 
 3. 스크립트를 실행합니다
 
 '''python
-python your_script_name.py
+    python your_script_name.py
 '''
 
 ## 결론
