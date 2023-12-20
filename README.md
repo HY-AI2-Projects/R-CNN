@@ -62,13 +62,12 @@ R-CNN : __Region with CNN features__
 
 1. 필요한 종속성을 설치합니다:
 
-'''python
+```python
     pip install -r requirements.txt
-'''
-
+```
 2. main 함수에서 이미지 URL을 교체합니다
 
-'''python
+```python
     #메인 함수
     def main():
         # 직접 이미지 링크로 교체하세요
@@ -82,13 +81,13 @@ R-CNN : __Region with CNN features__
 
         if _name__ == "_main__":
         main()
-'''
+```
 
 3. 스크립트를 실행합니다
 
-'''python
+```python
     python your_script_name.py
-'''
+```
 
 ## 결론
 * Object를 Localize하고, 분할하기 위하여 Region proposal을 CNN에 적용했습니다.
