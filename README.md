@@ -44,7 +44,7 @@ R-CNN : __Region with CNN features__
 
 # ResNet50을 활용한 R-CNN 객체 검출
 
-이 프로젝트는 ResNet50을 사용하여 R-CNN(Region-Based Convolutional Neural Network)을 통한 객체 검출을 제공합니다. 객체 검출 결과를 히트맵으로 시각화하여 눈으로 확인할 수 있습니다.
+이 [프로젝트](https://github.com/HY-AI2-Projects/R-CNN/blob/main/R_CNN.ipynb)는 ResNet50을 사용하여 R-CNN(Region-Based Convolutional Neural Network)을 통한 객체 검출을 제공합니다. 객체 검출 결과를 히트맵으로 시각화하여 눈으로 확인할 수 있습니다.
 
 ## 주요 기능
 
@@ -69,7 +69,7 @@ pip install -r requirements.txt
 2. main 함수에서 이미지 URL을 교체합니다
 
 '''python
-# 메인 함수
+#메인 함수
 def main():
     # 직접 이미지 링크로 교체하세요
     image_url = 'https://i.imgur.com/YOUR_IMAGE_ID.jpg'
@@ -80,7 +80,7 @@ def main():
         heatmap = detect_objects(img_array, model)
         visualize_heatmap(heatmap, 'path/to/your/image.jpg')  # 로컬 이미지의 경로로 변경
 
-if __name__ == "__main__":
+if _name__ == "_main__":
     main()
 '''
 
@@ -92,6 +92,6 @@ python your_script_name.py
 
 ## 결론
 * Object를 Localize하고, 분할하기 위하여 Region proposal을 CNN에 적용했습니다.
-* __훈련데이터가 부족해도 Pre-training에 이은 Fine-tuning으로 큰 성능__ 을 보여주었습니다.
+* 훈련데이터가 부족해도 Pre-training에 이은 Fine-tuning으로 큰 성능__ 을 보여주었습니다.
 * 결론적으로 Region proposal에 대한 CNN 학습, SVM Classification, Bounding box regession을 통하여 이전의 Object Detection 방법론들보다 큰 성능을 보였습니다.
-* 단, 학습이 여러 단계로 이루어져 있어 __긴 학습시간과 대용량의 저장공간이 요구된다__ 는 단점이 있습니다.
+* 단, 학습이 여러 단계로 이루어져 있어 긴 학습시간과 대용량의 저장공간이 요구된다 는 단점이 있습니다.
