@@ -89,8 +89,20 @@ R-CNN : __Region with CNN features__
     python your_script_name.py
 ```
 
-## 결론
-* Object를 Localize하고, 분할하기 위하여 Region proposal을 CNN에 적용했습니다.
-* 훈련데이터가 부족해도 Pre-training에 이은 Fine-tuning으로 큰 성능__ 을 보여주었습니다.
-* 결론적으로 Region proposal에 대한 CNN 학습, SVM Classification, Bounding box regession을 통하여 이전의 Object Detection 방법론들보다 큰 성능을 보였습니다.
-* 단, 학습이 여러 단계로 이루어져 있어 긴 학습시간과 대용량의 저장공간이 요구된다 는 단점이 있습니다.
+## 실패점
+* 이미지 URL이 올바르게 입력되어야 합니다. 현재의 예시에서는 https://imgur.com/YOUR_IMAGE_ID가 존재하지 않아 404 오류가 발생합니다. 직접 사용하실 이미지의 링크로 교체해주세요.
+  
+## 주요 기능
+1. 이미지 다운로드 및 전처리
+
+* 지정된 URL에서 이미지를 다운로드하고 ResNet50 모델에 입력할 수 있는 형식으로 전처리합니다.
+2. R-CNN 모델 구성
+
+* 사전 학습된 ResNet50 모델을 사용하여 객체 검출에 활용합니다.
+* 모델의 마지막 레이어를 제거하고 새로운 출력 레이어를 추가합니다.
+3. 객체 검출 함수
+
+* 주어진 이미지에서 객체를 검출하고 해당 객체의 히트맵을 생성합니다.
+4. 시각화 함수
+
+* 객체 검출 결과와 원본 이미지를 비교하여 히트맵을 시각화합니다.
