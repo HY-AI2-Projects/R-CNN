@@ -42,49 +42,53 @@ R-CNN : __Region with CNN features__
 3. CNN을 이용하여 각각 region proposal마다 고정된 길이의 feature vector를 추출합니다. 각각의 region proposal의 크기가 다르므로 CNN에 넣기전에 크기를 맞춰줍니다.(Warped)
 4. 각 region마다 해당 객체의 클래스 분류를 위해 linear SVM을 적용하여 분류합니다.
 
-## R-CNN 구현
-* R-CNN은 객체 검출(Object Detection)을 위한 모델 중 하나로, Region-based Convolutional Neural Network의 약자입니다.
-* 이 모델은 이미지에서 물체를 탐지하고 해당 물체의 경계 상자를 찾는 데 사용됩니다.
-* 아래는 R-CNN을 사용한 간단한 예제 코드입니다.
-* 주의할 점은, 이 코드는 학습된 가중치를 사용하지 않고 단순히 모델 구조를 구현하는 예제입니다.
-* 실제로 사용하려면 미리 학습된 가중치를 로드하고 fine-tuning이 필요합니다.
+# ResNet50을 활용한 R-CNN 객체 검출
+
+이 프로젝트는 ResNet50을 사용하여 R-CNN(Region-Based Convolutional Neural Network)을 통한 객체 검출을 제공합니다. 객체 검출 결과를 히트맵으로 시각화하여 눈으로 확인할 수 있습니다.
+
+## 주요 기능
+
+### 1. 이미지 객체 검출
+
+- ResNet50을 기반으로 한 사전 학습된 모델을 사용하여 이미지에서 다양한 객체를 식별합니다.
+- 클래스 확률을 계산하고 가장 확률이 높은 클래스의 객체를 검출합니다.
+
+### 2. 히트맵 시각화
+
+- 객체 검출에 사용된 ResNet50의 중간 레이어에서 생성된 히트맵을 생성합니다.
+- 히트맵은 해당 객체의 위치를 강조하여 시각적으로 확인할 수 있습니다.
+
+## 사용 방법
+
+1. 필요한 종속성을 설치합니다:
 
 '''python
-import tensorflow as tf
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense
-
-# R-CNN 모델 정의
-def create_rcnn_model(input_shape=(224, 224, 3), num_classes=20):
-    input_tensor = Input(shape=input_shape)
-
-    # Feature extraction using convolutional layers
-    x = Conv2D(64, (3, 3), activation='relu', padding='same')(input_tensor)
-    x = MaxPooling2D((2, 2))(x)
-    x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
-    x = MaxPooling2D((2, 2))(x)
-    x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-    x = MaxPooling2D((2, 2))(x)
-
-    # Flatten and add fully connected layers
-    x = Flatten()(x)
-    x = Dense(256, activation='relu')(x)
-    x = Dense(128, activation='relu')(x)
-    output = Dense(num_classes, activation='softmax')(x)
-
-    model = Model(inputs=input_tensor, outputs=output)
-    return model
-
-# 모델 생성
-rcnn_model = create_rcnn_model()
-
-# 모델 요약 출력
-rcnn_model.summary()
+pip install -r requirements.txt
 '''
 
-* 이 코드는 간단한 Convolutional Neural Network을 사용하여 이미지를 특징으로 추출하고, 추출된 특징을 사용하여 물체를 분류하는 기본적인 R-CNN 모델을 생성합니다.
-* 하지만, R-CNN은 계산 비용이 많이 들어서 실제로 사용하기 어렵습니다.
-* 더 효율적인 모델로서 Fast R-CNN, Faster R-CNN, 그리고 최신의 모델인 EfficientDet을 고려하는 것이 좋습니다.
+2. main 함수에서 이미지 URL을 교체합니다
+
+'''python
+# 메인 함수
+def main():
+    # 직접 이미지 링크로 교체하세요
+    image_url = 'https://i.imgur.com/YOUR_IMAGE_ID.jpg'
+    img_array = download_and_preprocess_image(image_url)
+
+    if img_array is not None:
+        model = build_rcnn_model()
+        heatmap = detect_objects(img_array, model)
+        visualize_heatmap(heatmap, 'path/to/your/image.jpg')  # 로컬 이미지의 경로로 변경
+
+if __name__ == "__main__":
+    main()
+'''
+
+3. 스크립트를 실행합니다
+
+'''python
+python your_script_name.py
+'''
 
 ## 결론
 * Object를 Localize하고, 분할하기 위하여 Region proposal을 CNN에 적용했습니다.
